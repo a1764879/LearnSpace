@@ -1,10 +1,10 @@
-package com.learn.app;
+package com.learn;
 
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages= {"com.learn.controller"})
+@SpringBootApplication
 public class SpringBootWebApplication {
 
 	public static void main(String[] args) {
