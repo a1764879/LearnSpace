@@ -1,23 +1,36 @@
 package com.learn.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.learn.dao.CountryLoadDao;
 import com.learn.modal.Country;
 
 @RestController
 public class CountryController {
+	
+	private Map<String,String> countryMap = new HashMap<String,String>();
+	
 	@RequestMapping("/country")
 	public Country country(@RequestParam(value="cntry", defaultValue="def_country") String name) {
-		System.out.println(name);
-		return new Country(1L, name, "das_capital");
+		String capital = countryMap.get(name);
+		return new Country(1L, name, capital);
 	}
 	
-	@RequestMapping(value = "/country_name", method = RequestMethod.POST)
-	public Country capital(@RequestParam(value="data", defaultValue="def_country") String name) {
-		return new Country(1L, name, "new_capital");
+	@RequestMapping("/capita_load")
+	@ResponseBody
+	public void countryLoad() {
+		countryMap = CountryLoadDao.loadCountry();
 	}
+	
+	
+	
 
 }

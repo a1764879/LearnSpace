@@ -4,6 +4,16 @@ $(document).ready(function () {
 	});
 });
 
+$.ajax({
+	type:"GET",
+	url:"/capita_load",
+	success:function(data) {
+		console.log(data);
+	},
+	error:function(e) {
+		console.log("ERROR: "+e);
+	}
+});
 
 function fire_ajax_submit() {
 	var country = '';
