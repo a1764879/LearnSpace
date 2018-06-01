@@ -4,7 +4,6 @@ $(document).ready(function () {
 	
 	
 	$('#suggCountry').on('click', '#suggButton', function(){
-	    console.log(this.value);
 	    fire_ajax_submit(this.value);
 	});
 
@@ -29,11 +28,13 @@ $(document).ready(function () {
 				newSugg.push(countryList[i]);
 			}
 		}
+		if(newSugg.length == 1) {
+			fire_ajax_submit(newSugg);
+		}
 		for(var i=0;i<newSugg.length;i++){
 			$('#suggCountry').append('<button class="btn btn-outline-light btn-sm suggestionButton" id="suggButton" value="'+newSugg[i]+'">'+newSugg[i]+'</button>'); 
 		}
 		
-		var country = $("#countryName").val();
 	})
 });
 
@@ -41,11 +42,11 @@ $(document).ready(function () {
 
 
 function fire_ajax_submit(country) {
+	$("#capital").html("");
 	$.ajax({
 		type:"GET",
 		url:"/country?cntry="+country,
 		success:function(data) {
-			console.log(data.capital);
 			$("#capital").append('<h3>'+data.capital+'</h3>')
 			
 		},
