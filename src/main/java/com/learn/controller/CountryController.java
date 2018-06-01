@@ -1,9 +1,9 @@
 package com.learn.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,8 +26,10 @@ public class CountryController {
 	
 	@RequestMapping("/capita_load")
 	@ResponseBody
-	public void countryLoad() {
+	public Set<String> countryLoad() {
 		countryMap = CountryLoadDao.loadCountry();
+		Set<String> cList = countryMap.keySet();
+		return cList;
 	}
 	
 	
